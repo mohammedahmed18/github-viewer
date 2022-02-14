@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import noImage from "../images/image-blank.png";
-
 import GithubContext from "../contexts/GithubContext";
 import { Link } from "react-router-dom";
 
