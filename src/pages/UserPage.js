@@ -73,6 +73,7 @@ const UserPage = () => {
             {twitter_username && (
               <a
                 target="_blank"
+                rel="noreferrer"
                 className="mx-auto text-xl social"
                 href={`http://twitter.com/${twitter_username}`}
               >
@@ -83,6 +84,7 @@ const UserPage = () => {
               <a
                 target="_blank"
                 className="mx-auto text-xl social"
+              rel="noreferrer"
                 href={blog.startsWith("http") ? blog : "http://" + blog}
               >
                 <FaGlobe />
