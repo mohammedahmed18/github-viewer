@@ -9,7 +9,7 @@ const UserItem = ({ user: { login, avatar_url } }) => {
   const { loading } = useContext(GithubContext);
   return (
     <Link
-      to={{ pathname: `/users/${login}` }}
+      to = {'/users/'+login}
       className="flex flex-col p-2 items-center bg-base-100 rounded-2xl hover:shadow-2xl shadow-lg"
       style={{ transition: "0.5s" }}
     >
@@ -23,7 +23,9 @@ const UserItem = ({ user: { login, avatar_url } }) => {
     </Link>
   );
 };
+
+export default UserItem;
+
 UserItem.proptypes = {
   user: PropTypes.object.isRequired,
 };
-export default UserItem;
