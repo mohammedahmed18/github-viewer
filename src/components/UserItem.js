@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import GithubContext from "../contexts/GithubContext";
 import { Link } from "react-router-dom";
@@ -23,7 +22,3 @@ const UserItem = ({ user: { login, avatar_url } }) => {
 };
 
 export default UserItem;
-
-UserItem.proptypes = {
-  user: PropTypes.object.isRequired,
-};
