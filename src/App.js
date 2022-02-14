@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router";
+
+import { GithubProvider } from "./contexts/GithubContext";
+import { AlertProvider } from "./contexts/AlertContext";
+
+import Navbar from "./components/Navbar";
+
+import NotFound from "./pages/404";
+import Home from "./pages/Home";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AlertProvider>
+      <GithubProvider>
+        <div className="flex flex-col h-screen">
+          <Navbar />
+          <main className="flex-1 mt-14">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/users/:login" element={<UserPage />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
+      </GithubProvider>
+    </AlertProvider>
   );
 }
 
