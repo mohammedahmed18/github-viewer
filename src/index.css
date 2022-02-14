@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(144, 144, 144);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#loading-github {
+  animation: rotate ease-in-out alternate infinite 0.6s;
+}
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+.badge-primary,
+.badge-secondary,
+.badge-info {
+  font-size: 1rem;
+  padding: 1rem;
+}
+.social {
+  transition: 0.5s;
+}
+.social:hover {
+  color: white;
+}
+.pf {
+  border: 10px solid;
+}
