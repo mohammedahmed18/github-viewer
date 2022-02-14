@@ -1,7 +1,4 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
-import noImage from "../images/image-blank.png";
-
 import GithubContext from "../contexts/GithubContext";
 import { Link } from "react-router-dom";
 
@@ -9,8 +6,8 @@ const UserItem = ({ user: { login, avatar_url } }) => {
   const { loading } = useContext(GithubContext);
   return (
     <Link
-      to={{ pathname: `/users/${login}` }}
-      className="flex flex-col p-2 items-center bg-base-100 rounded-2xl hover:shadow-2xl shadow-lg"
+      to={"/users/" + login}
+      className="flex flex-col p-2 items-center bg-base-100 rounded-2xl hover:bg-base-200/50 shadow-lg"
       style={{ transition: "0.5s" }}
     >
       <img
@@ -23,7 +20,5 @@ const UserItem = ({ user: { login, avatar_url } }) => {
     </Link>
   );
 };
-UserItem.proptypes = {
-  user: PropTypes.object.isRequired,
-};
+
 export default UserItem;

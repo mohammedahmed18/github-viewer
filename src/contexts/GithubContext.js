@@ -1,10 +1,9 @@
-import { createContext, useContext, useReducer } from "react";
-import { Navigate, useNavigate } from "react-router";
-const GithubContext = createContext();
+import { createContext, useReducer } from "react";
 import GithubReducer from "../reducers/GithubReducer";
 
+const GithubContext = createContext();
+const API_URL = "https://api.github.com";
 // alert context
-import AlertContext from "./AlertContext";
 export const GithubProvider = ({ children }) => {
   const initial_state = {
     users: [],
@@ -19,9 +18,6 @@ export const GithubProvider = ({ children }) => {
   const loadMore = async () => {
     const response = await fetch(state.apiUrl + state.page, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-      },
     });
     const data = await response.json();
     dispatch({
@@ -31,15 +27,9 @@ export const GithubProvider = ({ children }) => {
   };
 
   const getRepos = async (login) => {
-    const Url =
-      `${process.env.REACT_APP_API_URL}/users/` +
-      login +
-      "/repos?sort=created&per_page=28";
+    const Url = `${API_URL}/users/` + login + "/repos?sort=created&per_page=28";
     const response = await fetch(Url, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-      },
     });
 
     const repos = await response.json();
@@ -48,24 +38,16 @@ export const GithubProvider = ({ children }) => {
     dispatch({ type: "GET_REPOS", payload });
   };
 
-  const { showError } = useContext(AlertContext);
-  const navigate = useNavigate();
-
   const getUser = async (login) => {
     dispatch({ type: "START_LOADING" });
-    const Url = `${process.env.REACT_APP_API_URL}/users/` + login;
+    const Url = `${API_URL}/users/` + login;
     const response = await fetch(Url, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-      },
     });
     const data = await response.json();
     let payload = { user: data };
-    if (response.status == 404) {
-      payload.user = {};
-      showError("this user is not found");
-      navigate("/");
+    if (response.status === 404) {
+      window.location = "/not-found";
     }
     dispatch({ type: "GET_USER", payload });
   };
@@ -74,12 +56,9 @@ export const GithubProvider = ({ children }) => {
   const searchUsers = async (name) => {
     dispatch({ type: "START_LOADING" });
     const params = new URLSearchParams(`q=${name}`);
-    const Url = `${process.env.REACT_APP_API_URL}/search/users?${params}&per_page=42&page=`;
+    const Url = `${API_URL}/search/users?${params}&per_page=42&page=`;
     const response = await fetch(Url + 1, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-      },
     });
     const data = await response.json();
     dispatch({

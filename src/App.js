@@ -19,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/users/:login" element={<UserPage />} />
+              <Route path="/not-found" element={<NotFound />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </main>

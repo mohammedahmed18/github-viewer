@@ -6,6 +6,7 @@ import GithubContext from "../contexts/GithubContext";
 import OverLayLogo from "../components/OverlayLogo";
 
 const Home = () => {
+  const { results } = useContext(GithubContext);
   const [isVisible, setIsVisible] = useState(false);
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,12 +28,11 @@ const Home = () => {
 
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
-  const { results } = useContext(GithubContext);
   return (
     <div className="container h-full mx-auto py-5 relative">
       <SearchUsers />
       <UserResults />
-      {results.length == 0 ? <OverLayLogo /> : null}
+      {results.length === 0 && <OverLayLogo />}
       <button
         onClick={scrollToTop}
         className={`btn fixed bottom-5 right-5 btn-base-200 rounded-full drop-shadow-xl p-4 text-primary ${

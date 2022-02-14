@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const UserResults = () => {
   const { loading, results, loadMore } = useContext(GithubContext);
-
   if (loading) {
     return <Loading />;
   }
