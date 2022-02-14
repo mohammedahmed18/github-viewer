@@ -1,12 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
 import { Navigate, useNavigate } from "react-router";
 import GithubReducer from "../reducers/GithubReducer";
+import AlertContext from "./AlertContext";
 
 
 const GithubContext = createContext();
 
 // alert context
-import AlertContext from "./AlertContext";
 export const GithubProvider = ({ children }) => {
   const initial_state = {
     users: [],
