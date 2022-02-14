@@ -56,6 +56,7 @@ const RepoItem = ({ repo }) => {
     <a
       href={html_url}
       target="_blank"
+      rel="noreferrer"
       className="bg-base-200/25 hover:bg-base-200/50 ease-in-out duration-300 flex flex-col p-4 justify-between shadow-xl"
     >
       {/* name */}
