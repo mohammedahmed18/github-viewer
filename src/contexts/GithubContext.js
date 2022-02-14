@@ -1,7 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
 import { Navigate, useNavigate } from "react-router";
-const GithubContext = createContext();
 import GithubReducer from "../reducers/GithubReducer";
+
+
+const GithubContext = createContext();
 
 // alert context
 import AlertContext from "./AlertContext";
