@@ -21,7 +21,7 @@ const RepoItem = ({ repo }) => {
 
   const formatStars = (_stars) => {
     if (_stars >= 1000) {
-      let starsK = Math.floor(_size / 1000);
+      let starsK = Math.floor(_stars / 1000);
       return `${starsK} k`;
     }
     return `${_stars}`;
