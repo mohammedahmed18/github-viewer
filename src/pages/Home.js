@@ -32,7 +32,7 @@ const Home = () => {
     <div className="container h-full mx-auto py-5 relative">
       <SearchUsers />
       <UserResults />
-      {results.length == 0 ? <OverLayLogo /> : null}
+//       {results.length == 0 ? <OverLayLogo /> : null}
       <button
         onClick={scrollToTop}
         className={`btn fixed bottom-5 right-5 btn-base-200 rounded-full drop-shadow-xl p-4 text-primary ${
