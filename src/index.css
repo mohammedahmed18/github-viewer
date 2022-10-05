@@ -6,7 +6,7 @@ body {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 2px;
 }
 
 /* Track */
@@ -48,4 +48,8 @@ body {
 }
 .pf {
   border: 10px solid;
+}
+button:focus,
+button:active {
+  outline: none !important;
 }

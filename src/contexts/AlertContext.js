@@ -1,4 +1,4 @@
-const { createContext, useState, useEffect } = require("react");
+const { createContext, useState, useEffect, useContext } = require("react");
 
 const AlertContext = createContext();
 
@@ -21,10 +21,10 @@ export const AlertProvider = ({ children }) => {
       <>
         <div
           className={`alert
+          backdrop-blur-md
           alert-error
-          ${
-            shown ? "opacity-100 scale-100 " : "opacity-0 scale-0"
-          } fixed right-5 top-16 mt-5`}
+          ${shown ? "opacity-100 scale-100 " : "opacity-0 scale-0"
+            } fixed right-5 top-16 mt-5`}
           style={{ transition: "0.5s", zIndex: "99" }}
         >
           {msg}
@@ -34,4 +34,5 @@ export const AlertProvider = ({ children }) => {
     </AlertContext.Provider>
   );
 };
-export default AlertContext;
+const useAlerts = () => useContext(AlertContext)
+export default useAlerts

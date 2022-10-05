@@ -1,12 +1,12 @@
 import SearchUsers from "../components/SearchUsers";
 import UserResults from "../components/UsersResults";
 import { FaArrowUp } from "react-icons/fa";
-import { useState, useEffect, useContext } from "react";
-import GithubContext from "../contexts/GithubContext";
+import { useState, useEffect } from "react";
+import useGithub from "../contexts/GithubContext";
 import OverLayLogo from "../components/OverlayLogo";
 
 const Home = () => {
-  const { results } = useContext(GithubContext);
+  const { results } = useGithub();
   const [isVisible, setIsVisible] = useState(false);
   const scrollToTop = () => {
     window.scrollTo({
@@ -35,9 +35,8 @@ const Home = () => {
       {results.length === 0 && <OverLayLogo />}
       <button
         onClick={scrollToTop}
-        className={`btn fixed bottom-5 right-5 btn-base-200 rounded-full drop-shadow-xl p-4 text-primary ${
-          !isVisible ? "opacity-0 scale-0" : "opacity-100 scale-100"
-        }`}
+        className={`btn fixed bottom-5 right-5 btn-base-200 rounded-full drop-shadow-xl p-4 text-primary ${!isVisible ? "opacity-0 scale-0" : "opacity-100 scale-100"
+          }`}
         style={{ transition: "ease-in-out all 0.5s" }}
       >
         <FaArrowUp />

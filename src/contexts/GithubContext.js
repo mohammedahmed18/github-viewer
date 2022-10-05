@@ -1,10 +1,13 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import GithubReducer from "../reducers/GithubReducer";
+import useAlerts from "./AlertContext";
 
 const GithubContext = createContext();
 const API_URL = "https://api.github.com";
-// alert context
+
+
 export const GithubProvider = ({ children }) => {
+  const { showError } = useAlerts()
   const initial_state = {
     users: [],
     currentUser: {},
@@ -16,10 +19,12 @@ export const GithubProvider = ({ children }) => {
   const [state, dispatch] = useReducer(GithubReducer, initial_state);
 
   const loadMore = async () => {
+    dispatch({ type: "START_LOADING" });
     const response = await fetch(state.apiUrl + state.page, {
       method: "GET",
     });
     const data = await response.json();
+    if (data.items.length === 0) showError("no more items to show")
     dispatch({
       type: "LOAD_MORE",
       payload: data.items,
@@ -55,11 +60,10 @@ export const GithubProvider = ({ children }) => {
   ////////////////////////////
   const searchUsers = async (name) => {
     dispatch({ type: "START_LOADING" });
+    dispatch({ type: "EMPTY_USERS" });
     const params = new URLSearchParams(`q=${name}`);
-    const Url = `${API_URL}/search/users?${params}&per_page=42&page=`;
-    const response = await fetch(Url + 1, {
-      method: "GET",
-    });
+    const Url = `${API_URL}/search/users?${params}&per_page=60&page=1`;
+    const response = await fetch(Url);
     const data = await response.json();
     dispatch({
       type: "GET_USERS",
@@ -85,4 +89,5 @@ export const GithubProvider = ({ children }) => {
   );
 };
 
-export default GithubContext;
+const useGithub = () => (useContext(GithubContext));
+export default useGithub

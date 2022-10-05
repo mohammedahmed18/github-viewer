@@ -8,6 +8,11 @@ const GithubReducer = (state, action) => {
         apiUrl: action.payload.Url,
         page: 2,
       };
+    case "EMPTY_USERS":
+      return {
+        ...state,
+        users: []
+      }
     case "GET_REPOS":
       return {
         ...state,
@@ -29,6 +34,7 @@ const GithubReducer = (state, action) => {
       return {
         ...state,
         users: [...state.users, ...action.payload],
+        loading: false,
         page: state.page + 1,
       };
     default:

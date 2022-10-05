@@ -1,13 +1,13 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../components/loading";
 import { FaUsers, FaCodepen, FaTwitter, FaGlobe } from "react-icons/fa";
 import { useParams } from "react-router";
-import GithubContext from "../contexts/GithubContext";
+import useGithub from "../contexts/GithubContext";
 import Repos from "../components/Repos";
 const UserPage = () => {
   const { login } = useParams();
   const { getUser, currentUser, loading, repos, getRepos } =
-    useContext(GithubContext);
+    useGithub();
   const [fullImg, setFullImg] = useState(false);
   const [addBorder, setAddBorder] = useState(false);
 
@@ -42,21 +42,20 @@ const UserPage = () => {
             onClick={() => {
               setFullImg(false);
             }}
-            className="fixed inset-0 bg-base-300/75"
+            className="fixed inset-0 bg-zinc-900/90"
           ></div>
         )}
         <div className="text-center w-full">
           <figure>
             <img
-              className={`rounded-full ${
-                addBorder && "pf"
-              } ease-in-out duration-500 w-3/4 mx-auto cursor-pointer`}
+              className={`rounded-full ${addBorder && "pf"
+                } ease-in-out duration-500 w-3/4 mx-auto cursor-pointer`}
               style={
                 fullImg
                   ? {
-                      transform: "scale(1.5) translateY(5rem)",
-                      borderRadius: "0",
-                    }
+                    transform: "scale(1.5) translateY(5rem)",
+                    borderRadius: "0",
+                  }
                   : null
               }
               src={avatar_url}
@@ -84,7 +83,7 @@ const UserPage = () => {
               <a
                 target="_blank"
                 className="mx-auto text-xl social"
-              rel="noreferrer"
+                rel="noreferrer"
                 href={blog.startsWith("http") ? blog : "http://" + blog}
               >
                 <FaGlobe />
@@ -131,6 +130,7 @@ const UserPage = () => {
             <a
               className="btn btn-outline rounded-full"
               href={html_url}
+              rel="noreferrer"
               target="_blank"
             >
               Visit on github

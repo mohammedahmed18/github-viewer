@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import GithubContext from "../contexts/GithubContext";
 import { Link } from "react-router-dom";
 
 const UserItem = ({ user: { login, avatar_url } }) => {
-  const { loading } = useContext(GithubContext);
   return (
     <Link
       to={"/users/" + login}
@@ -12,12 +9,14 @@ const UserItem = ({ user: { login, avatar_url } }) => {
     >
       <img
         className="mask mask-squircle my-3 w-3/4 ease-in-out"
-        style={loading ? { width: "1rem", height: "1rem" } : {}}
         src={avatar_url}
-        alt="profile picture"
+        alt="profile"
       />
       <span className="text-sm md:text-md flex-1 text-center">{login}</span>
     </Link>
+
+
+
   );
 };
 

@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
-import AlertContext from "../contexts/AlertContext";
-import GithubContext from "../contexts/GithubContext";
+import { useState } from "react";
+import useAlerts from "../contexts/AlertContext";
+import useGithub from "../contexts/GithubContext";
 
 const SearchUsers = () => {
   const [search, setSearch] = useState("");
-  const { searchUsers } = useContext(GithubContext);
-  const { showError } = useContext(AlertContext);
+  const { searchUsers } = useGithub();
+  const { showError } = useAlerts();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,12 +17,13 @@ const SearchUsers = () => {
       <input
         type="text"
         placeholder="search users..."
-        className="input bg-neutral w-1/2 rounded-r-none	"
+        className="input bg-zinc-900 w-1/2 rounded-r-none	"
         onChange={(e) => {
           setSearch(e.target.value);
         }}
+        autoComplete="false"
       />
-      <button type="submit" className="btn btn-outline rounded-l-none">
+      <button type="submit" className="btn rounded-l-none">
         Search
       </button>
     </form>
