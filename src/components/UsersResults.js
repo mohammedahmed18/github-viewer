@@ -16,15 +16,17 @@ const UserResults = () => {
         ))}
       </div>
 
-      <div className="py-3">
-        <button
-          onClick={loadMore}
-          className="btn mx-auto rounded-full bg-zinc-800 block"
-          disabled={loading}
-        >
-          Load more
-        </button>
-      </div >
+      {results.length > 0 ? (
+        <div className="py-3">
+          <button
+            onClick={loadMore}
+            className="btn mx-auto rounded-full bg-zinc-800 block"
+            disabled={loading}
+          >
+            Load more
+          </button>
+        </div >
+      ) : null}
     </>
   );
 };
